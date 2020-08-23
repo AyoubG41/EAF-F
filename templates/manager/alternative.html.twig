@@ -1,0 +1,255 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Alternatives{% endblock %}
+
+{% block body1 %}
+    <div class="container">
+
+    <ol class="track-progress">
+
+        {% if app.session.get('project').id is defined %}
+            {% if app.user.evaluateEntreprise.id is defined %}
+                {% if app.user.evaluateEntreprise.id == app.session.get('project').id %}
+                    <li style="width: 11.1% !important;"class="done">
+                        <em>1</em>
+                        <span data-toggle="tooltip" title="Create Project">1</span>
+                    </li>
+                    <li style="width: 11.1% !important;"class="done">
+                        <em>2</em>
+                        <span  data-toggle="tooltip" title="Generate Evaluateures">2</span>
+                    </li>
+                    <li style="width: 11.1% !important;"class="done">
+                        <em>3</em>
+                        <span data-toggle="tooltip" title="Add criteria">3</span>
+                    </li>
+                    <li style="width: 11.1% !important;"class="done">
+                        <em>4</em>
+                        <span data-toggle="tooltip" title="Criteria validation">4</span>
+                    </li>
+
+                    <li style="width: 11.1% !important;"class="done">
+                        <em>5</em>
+                       <span data-toggle="tooltip" title="Add Preference">5</span>
+                    </li>
+
+                    <li style="width: 11.1% !important;"class="done">
+                        <em>6</em>
+                        <span id="activated"  data-toggle="tooltip" title="Add Alternatives">6</span>
+                    </li>
+
+                    <li style="width: 11.1% !important;"class="todo">
+                        <em>7</em>
+                        <span data-toggle="tooltip" title="Generate Experts">7</span>
+                    </li>
+
+                    <li style="width: 11.1% !important;"class="todo">
+                        <em>8</em>
+                        <span data-toggle="tooltip" title="Preferences">8</span>
+                    </li>
+
+                    <li style="width: 11.1% !important;" class="todo">
+                        <em>9</em>
+                        <span data-toggle="tooltip" title="Binary preferences">9</span>
+                    </li>
+
+                {% else %}
+                    <li style="width: 14.2% !important;" class="done">
+                        <em>1</em>
+                        <span data-toggle="tooltip" title="Create Project">1</span>
+                    </li>
+                    <li style="width: 14.2% !important;" class="done">
+                        <em>2</em>
+                        <span  data-toggle="tooltip" title="Generate Evaluateures">2</span>
+                    </li>
+                    <li style="width: 14.2% !important;" class="done">
+                        <em>3</em>
+                        <span  data-toggle="tooltip" title="Criteria validation">3</span>
+                    </li>-
+                    <li style="width: 14.2% !important;" class="done">
+                        <em>4</em>
+                        <span id="activated"  data-toggle="tooltip" title="Add Alternatives">4</span>
+                    </li>
+                    <li style="width: 14.2% !important;" class="todo">
+                        <em>5</em>
+                        <span  data-toggle="tooltip" title="Generate Experts">5</span>
+                    </li>
+                    <li style="width: 14.2% !important;" class="todo">
+                        <em>6</em>
+                        <span data-toggle="tooltip" title="Preferences">6</span>
+                    </li>
+                    <li style="width: 14.2% !important;" class="todo">
+                        <em>7</em>
+                        <span data-toggle="tooltip" title="Binary preferences">7</span>
+                    </li>
+                {% endif %}
+            {% else %}
+                <li style="width: 14.2% !important;" class="done">
+                    <em>1</em>
+                    <span data-toggle="tooltip" title="Create Project">1</span>
+                </li>
+                <li style="width: 14.2% !important;" class="done">
+                    <em>2</em>
+                    <span  data-toggle="tooltip" title="Generate Evaluateures">2</span>
+                </li>
+                <li style="width: 14.2% !important;" class="done">
+                    <em>3</em>
+                    <span  data-toggle="tooltip" title="Criteria validation">3</span>
+                </li>-
+                <li style="width: 14.2% !important;" class="done">
+                    <em>4</em>
+                    <span id="activated"  data-toggle="tooltip" title="Add Alternatives">4</span>
+                </li>
+                <li style="width: 14.2% !important;" class="todo">
+                    <em>5</em>
+                    <span  data-toggle="tooltip" title="Generate Experts">5</span>
+                </li>
+                <li style="width: 14.2% !important;" class="todo">
+                    <em>6</em>
+                    <span data-toggle="tooltip" title="Preferences">6</span>
+                </li>
+                <li style="width: 14.2% !important;" class="todo">
+                    <em>7</em>
+                    <span data-toggle="tooltip" title="Binary preferences">7</span>
+                </li>
+            {% endif %}
+
+        {% else %}
+            <li style="width: 14.2% !important;" class="done">
+                <em>1</em>
+                <span data-toggle="tooltip" title="Create Project">1</span>
+            </li>
+            <li style="width: 14.2% !important;" class="done">
+                <em>2</em>
+                <span data-toggle="tooltip" title="Generate Evaluateures">2</span>
+            </li>
+            <li style="width: 14.2% !important;" class="done">
+                <em>3</em>
+                <span  data-toggle="tooltip" title="Criteria validation">3</span>
+            </li>-
+            <li style="width: 14.2% !important;" class="done">
+                <em>4</em>
+                <span id="activated" data-toggle="tooltip" title="Add Alternatives">4</span>
+            </li>
+            <li style="width: 14.2% !important;" class="todo">
+                <em>5</em>
+                <span  data-toggle="tooltip" title="Generate Experts">5</span>
+            </li>
+            <li style="width: 14.2% !important;" class="todo">
+                <em>6</em>
+                <span data-toggle="tooltip" title="Preferences">6</span>
+            </li>
+            <li style="width: 14.2% !important;" class="todo">
+                <em>7</em>
+                <span data-toggle="tooltip" title="Binary preferences">7</span>
+            </li>
+        {% endif %}
+
+
+    </ol>
+        <br>
+        {% for flashMessage in app.session.flashbag.get('addCritere') %}
+            <div class="alert alert-success">
+                {{ flashMessage }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('addCritereFalse') %}
+            <div class="alert alert-danger">
+                {{ flashMessage }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+        <form action="/manager/alternative_create" method="post">
+            <div class="form-group">
+                <label for="exampleInputName"> Name</label>
+                <input type="text" class="form-control" name="name" id="exampleInputName" placeholder="Enter The Name" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputVersion"> Version</label>
+                <input type="text" class="form-control" name="version" id="exampleInputVersion" placeholder="Enter The Version" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputCriteria"> Criteria</label>
+                <select class="form-control" id="exampleInputCriteria" required name="criteria">
+                    <option value="">Choose Criteria</option>
+                    {% for critaria in critarias %}
+                        <option value="{{ critaria.id }}">{{ critaria.name }}</option>
+                    {% endfor %}
+                </select>            </div>
+            <button type="submit" class="btn btn-primary">Insert</button>
+        </form>
+
+        <br>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Version</th>
+                <th scope="col">Criteria</th>
+                <th scope="col">Delete</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for myEval in myEvals %}
+                <tr>
+
+                        <td>{{ myEval.name }}</td>
+                        <td>{{ myEval.version }}</td>
+                        <td>{{ myEval.evaluationElement.name }}</td>
+                    <td><a type="button" href="/manager/alternative/{{ myEval.id }}" class="btn btn-danger btn-sm">Delete</a></td>
+                </tr>
+            {% endfor %}
+
+
+            </tbody>
+        </table>
+
+    </div>
+     <div class="container">
+ <div class="row">
+        <div class="col">
+            <label for="theSelect">Add Preference: </label>
+            {% if app.session.get('project').id is defined %}
+            {% if app.session.get('project').etapes[2] == 1 %}
+            <input id="test2" onchange="etape()" type="checkbox" checked name="checkingB">
+            {% else %}
+            <input id="test2" onchange="etape()" type="checkbox" name="checkingB">
+            {% endif %}
+            {% else %}
+            <input id="test2" onchange="etape()" type="checkbox" name="checkingB">
+            {% endif %}
+        </div>
+    </div>
+     <div class="container">
+    <div class="container">
+            <a href="{{ path('generate_experts') }}"  style="float: right" type="submit" class="btn btn-primary"><svg class="bi bi-arrow-right-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path fill-rule="evenodd" d="M7.646 11.354a.5.5 0 0 1 0-.708L10.293 8 7.646 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0z"/>
+                    <path fill-rule="evenodd" d="M4.5 8a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z"/>
+                </svg></a>
+
+        <a href="{{ path('manager') }}" style="float: left" type="submit" class="btn btn-danger"><svg class="bi bi-arrow-left-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path fill-rule="evenodd" d="M8.354 11.354a.5.5 0 0 0 0-.708L5.707 8l2.647-2.646a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z"/>
+                <path fill-rule="evenodd" d="M11.5 8a.5.5 0 0 0-.5-.5H6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5z"/>
+            </svg></a>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $('#activated').tooltip('toggle');
+           function etape() {
+            axios.get('/manager/etape/3').then(function (response) {
+
+            }).catch(function (error) {
+                console.log(error.message);
+            })
+        }
+    </script>
+
+{% endblock %}

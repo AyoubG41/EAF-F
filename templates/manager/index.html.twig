@@ -1,0 +1,478 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Welcome!{% endblock %}
+
+{% block stylesheets1 %}
+<style>
+    HTML CSSResult EDIT ON @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900');
+
+
+    .card {
+        width: 10px;
+        clear: both;
+        display: block;
+        padding: 0px 0px;
+        background-color: #009BFF;
+        border-radius: 4px;
+    }
+
+    .card::after {
+        clear: both;
+        display: block;
+        content: "";
+    }
+
+    .card .checkbox-container {
+        float: left;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    .card .circular-container {
+        background-color: #343a40;
+    }
+
+    .input-title {
+        clear: both;
+        padding: 22px 0px 0px 0px;
+        font-size: 16px;
+        color: rgba(255, 255, 255, .6);
+        font-weight: 300;
+    }
+
+
+
+
+    /* Styling Checkbox Starts */
+    .checkbox-label {
+        display: block;
+        position: relative;
+        margin: auto;
+        cursor: pointer;
+        font-size: 22px;
+        line-height: 24px;
+        height: 24px;
+        width: 24px;
+        clear: both;
+    }
+
+    .checkbox-label input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .checkbox-label .checkbox-custom {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        height: 24px;
+        width: 24px;
+        background-color: transparent;
+        border-radius: 5px;
+        transition: all 0.3s ease-out;
+        -webkit-transition: all 0.3s ease-out;
+        -moz-transition: all 0.3s ease-out;
+        -ms-transition: all 0.3s ease-out;
+        -o-transition: all 0.3s ease-out;
+        border: 2px solid #FFFFFF;
+    }
+
+
+    .checkbox-label input:checked~.checkbox-custom {
+        background-color: #FFFFFF;
+        border-radius: 5px;
+        -webkit-transform: rotate(0deg) scale(1);
+        -ms-transform: rotate(0deg) scale(1);
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
+        border: 2px solid #FFFFFF;
+    }
+
+
+    .checkbox-label .checkbox-custom::after {
+        position: absolute;
+        content: "";
+        left: 12px;
+        top: 12px;
+        height: 0px;
+        width: 0px;
+        border-radius: 5px;
+        border: solid #009BFF;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(0deg) scale(0);
+        -ms-transform: rotate(0deg) scale(0);
+        transform: rotate(0deg) scale(0);
+        opacity: 1;
+        transition: all 0.3s ease-out;
+        -webkit-transition: all 0.3s ease-out;
+        -moz-transition: all 0.3s ease-out;
+        -ms-transition: all 0.3s ease-out;
+        -o-transition: all 0.3s ease-out;
+    }
+
+
+    .checkbox-label input:checked~.checkbox-custom::after {
+        -webkit-transform: rotate(45deg) scale(1);
+        -ms-transform: rotate(45deg) scale(1);
+        transform: rotate(45deg) scale(1);
+        opacity: 1;
+        left: 8px;
+        top: 3px;
+        width: 6px;
+        height: 12px;
+        border: solid #009BFF;
+        border-width: 0 2px 2px 0;
+        background-color: transparent;
+        border-radius: 0;
+    }
+
+
+
+    /* For Ripple Effect */
+    .checkbox-label .checkbox-custom::before {
+        position: absolute;
+        content: "";
+        left: 10px;
+        top: 10px;
+        width: 0px;
+        height: 0px;
+        border-radius: 5px;
+        border: 2px solid #FFFFFF;
+        -webkit-transform: scale(0);
+        -ms-transform: scale(0);
+        transform: scale(0);
+    }
+
+    .checkbox-label input:checked~.checkbox-custom::before {
+        left: -3px;
+        top: -3px;
+        width: 24px;
+        height: 24px;
+        border-radius: 5px;
+        -webkit-transform: scale(3);
+        -ms-transform: scale(3);
+        transform: scale(3);
+        opacity: 0;
+        z-index: 999;
+        transition: all 0.3s ease-out;
+        -webkit-transition: all 0.3s ease-out;
+        -moz-transition: all 0.3s ease-out;
+        -ms-transition: all 0.3s ease-out;
+        -o-transition: all 0.3s ease-out;
+    }
+</style>
+{% endblock %}
+
+{% block body1 %}
+
+
+<div class="container">
+    <ol class="track-progress">
+
+        {% if app.session.get('project').id is defined %}
+        {% if app.user.evaluateEntreprise.id is defined %}
+        {% if app.user.evaluateEntreprise.id == app.session.get('project').id %}
+        <li style="width: 11.1% !important;" class="done">
+            <em>1</em>
+            <span data-toggle="tooltip" title="Create Project">1</span>
+        </li>
+        <li style="width: 11.1% !important;" class="done">
+            <em>2</em>
+            <span data-toggle="tooltip" title="Generate Evaluateures">2</span>
+        </li>
+        <li style="width: 11.1% !important;" class="done">
+            <em>3</em>
+            <span data-toggle="tooltip" title="Add criteria">3</span>
+        </li>
+        <li style="width: 11.1% !important;" class="done">
+            <em>4</em>
+            <span id="activated" data-toggle="tooltip" title="Criteria validation">4</span>
+        </li>
+
+        <li style="width: 11.1% !important;" class="todo">
+            <em>5</em>
+            <span data-toggle="tooltip" title="Add Preference">5</span>
+        </li>
+
+        <li style="width: 11.1% !important;" class="todo">
+            <em>6</em>
+            <span data-toggle="tooltip" title="Add Alternatives">6</span>
+        </li>
+
+        <li style="width: 11.1% !important;" class="todo">
+            <em>7</em>
+            <span data-toggle="tooltip" title="Generate Experts">7</span>
+        </li>
+
+        <li style="width: 11.1% !important;" class="todo">
+            <em>8</em>
+            <span data-toggle="tooltip" title="Preferences">8</span>
+        </li>
+
+        <li style="width: 11.1% !important;" class="todo">
+            <em>9</em>
+            <span data-toggle="tooltip" title="Binary preferences">9</span>
+        </li>
+        {% else %}
+        <li style="width: 14.2% !important;" class="done">
+            <em>1</em>
+            <span data-toggle="tooltip" title="Create Project">1</span>
+        </li>
+        <li style="width: 14.2% !important;" class="done">
+            <em>2</em>
+            <span data-toggle="tooltip" title="Generate Evaluateures">2</span>
+        </li>
+        <li style="width: 14.2% !important;" class="done">
+            <em>3</em>
+            <span id="activated" data-toggle="tooltip" title="Criteria validation">3</span>
+        </li>-
+        <li style="width: 14.2% !important;" class="todo">
+            <em>4</em>
+            <span data-toggle="tooltip" title="Add Alternatives">4</span>
+        </li>
+        <li style="width: 14.2% !important;" class="todo">
+            <em>5</em>
+            <span data-toggle="tooltip" title="Generate Experts">5</span>
+        </li>
+        <li style="width: 14.2% !important;" class="todo">
+            <em>6</em>
+            <span data-toggle="tooltip" title="Preferences">6</span>
+        </li>
+        <li style="width: 14.2% !important;" class="todo">
+            <em>7</em>
+            <span data-toggle="tooltip" title="Binary preferences">7</span>
+        </li>
+        {% endif %}
+        {% else %}
+        <li style="width: 14.2% !important;" class="done">
+            <em>1</em>
+            <span data-toggle="tooltip" title="Create Project">1</span>
+        </li>
+        <li style="width: 14.2% !important;" class="done">
+            <em>2</em>
+            <span data-toggle="tooltip" title="Generate Evaluateures">2</span>
+        </li>
+        <li style="width: 14.2% !important;" class="done">
+            <em>3</em>
+            <span id="activated" data-toggle="tooltip" title="Criteria validation">3</span>
+        </li>-
+        <li style="width: 14.2% !important;" class="todo">
+            <em>4</em>
+            <span data-toggle="tooltip" title="Add Alternatives">4</span>
+        </li>
+        <li style="width: 14.2% !important;" class="todo">
+            <em>5</em>
+            <span data-toggle="tooltip" title="Generate Experts">5</span>
+        </li>
+        <li style="width: 14.2% !important;" class="todo">
+            <em>6</em>
+            <span data-toggle="tooltip" title="Preferences">6</span>
+        </li>
+        <li style="width: 14.2% !important;" class="todo">
+            <em>7</em>
+            <span data-toggle="tooltip" title="Binary preferences">7</span>
+        </li>
+        {% endif %}
+
+        {% else %}
+        <li style="width: 14.2% !important;" class="done">
+            <em>1</em>
+            <span data-toggle="tooltip" title="Create Project">1</span>
+        </li>
+        <li style="width: 14.2% !important;" class="done">
+            <em>2</em>
+            <span data-toggle="tooltip" title="Generate Evaluateures">2</span>
+        </li>
+        <li style="width: 14.2% !important;" class="done">
+            <em>3</em>
+            <span id="activated" data-toggle="tooltip" title="Criteria validation">3</span>
+        </li>-
+        <li style="width: 14.2% !important;" class="todo">
+            <em>4</em>
+            <span data-toggle="tooltip" title="Add Alternatives">4</span>
+        </li>
+        <li style="width: 14.2% !important;" class="todo">
+            <em>5</em>
+            <span data-toggle="tooltip" title="Generate Experts">5</span>
+        </li>
+        <li style="width: 14.2% !important;" class="todo">
+            <em>6</em>
+            <span data-toggle="tooltip" title="Preferences">6</span>
+        </li>
+        <li style="width: 14.2% !important;" class="todo">
+            <em>7</em>
+            <span data-toggle="tooltip" title="Binary preferences">7</span>
+        </li>
+        {% endif %}
+
+    </ol>
+
+
+    {% if  is_granted('ROLE_MANAGER') %}
+    <div class="col-1"></div>
+
+    <div class="col-12" style="padding: 20px;border-radius: 10px;">
+
+        <div class="alert alert-info">Criteria Validation
+        </div>
+
+        <br>
+        <table class="table table-dark">
+            <thead>
+                <tr id="firstTr">
+                    <th scope="col">Nom</th>
+                    <th scope="col">Parent</th>
+                    <th scope="col">Creator</th>
+                    <th scope="col" id="lastTh">Validate</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col-1"></div>
+
+    {% endif %}
+    <div class="row">
+        <div class="col">
+            <label for="theSelect">Add Preference: </label>
+            {% if app.session.get('project').id is defined %}
+            {% if app.session.get('project').etapes[1] == 1 %}
+            <input id="test2" onchange="etape()" type="checkbox" checked name="checkingB">
+            {% else %}
+            <input id="test2" onchange="etape()" type="checkbox" name="checkingB">
+            {% endif %}
+            {% else %}
+            <input id="test2" onchange="etape()" type="checkbox" name="checkingB">
+
+            {% endif %}
+
+
+        </div>
+    </div>
+
+    <div class="container">
+
+
+
+        {% if app.user.evaluateEntreprise.id is defined and app.user.evaluateEntreprise.id == app.session.get('project').id %}
+        <a href="{{ path('preference') }}" style="float: right" type="submit" class="btn btn-primary"><svg
+                class="bi bi-arrow-right-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                <path fill-rule="evenodd"
+                    d="M7.646 11.354a.5.5 0 0 1 0-.708L10.293 8 7.646 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0z" />
+                <path fill-rule="evenodd" d="M4.5 8a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z" />
+            </svg></a>
+        <a href="{{ path('critere') }}" style="float: left" type="submit" class="btn btn-danger"><svg
+                class="bi bi-arrow-left-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                <path fill-rule="evenodd"
+                    d="M8.354 11.354a.5.5 0 0 0 0-.708L5.707 8l2.647-2.646a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z" />
+                <path fill-rule="evenodd" d="M11.5 8a.5.5 0 0 0-.5-.5H6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5z" />
+            </svg></a>
+        {% else %}
+        <a href="{{ path('alternative') }}" style="float: right" type="submit" class="btn btn-primary"><svg
+                class="bi bi-arrow-right-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                <path fill-rule="evenodd"
+                    d="M7.646 11.354a.5.5 0 0 1 0-.708L10.293 8 7.646 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0z" />
+                <path fill-rule="evenodd" d="M4.5 8a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z" />
+            </svg></a>
+        <a href="{{ path('generate_evaluateures') }}" style="float: left" type="submit" class="btn btn-danger"><svg
+                class="bi bi-arrow-left-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                <path fill-rule="evenodd"
+                    d="M8.354 11.354a.5.5 0 0 0 0-.708L5.707 8l2.647-2.646a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z" />
+                <path fill-rule="evenodd" d="M11.5 8a.5.5 0 0 0-.5-.5H6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5z" />
+            </svg></a>
+
+        {% endif %}
+
+
+    </div>
+    {% endblock %}
+    {% block javascripts %}
+    <script>
+        $('#activated').tooltip('toggle')
+        evaluateures();
+
+        function evaluateures() {
+            $('tbody').empty();
+            $('.addedTh').remove();
+            var entr = null;
+            axios.get('/manager/jsonget/' + entr).then(function (response) {
+                response.data.forEach(function (element) {
+                    var text = "<th class='addedTh'>" + element.name + "</th>";
+                    $('#firstTr').append(text);
+                });
+            }).catch(function (error) {
+                console.log(error.message);
+            })
+            var i;
+            axios.get('/manager/jsonget2/' + entr).then(function (response) {
+                response.data.forEach(function (element) {
+                    var text = "<tr id='" + element.id + "'>" +
+                        "<td>" + element.name + "</td>" +
+                        "<td>" + element.parent + "</td>" +
+                        "<td>" + element.createur + "</td>" +
+                        "</tr>";
+                    if (element.valMain == true) {
+                        var check = "<td><input onclick='validateCheck(" + element.id +
+                            ")'  checked id=\"eval" + element.id + "\"type=\"checkbox\"></td>";
+                    } else {
+                        var check = "<td><input onclick='validateCheck(" + element.id + ")' id=\"eval" +
+                            element.id + "\"type=\"checkbox\"></td>";
+                    }
+
+                    $('tbody').append(text);
+                    $('#' + element.id).append(check);
+                    for (i = 0; i <= (element.validee).length - 1; i++) {
+                        if (element.validee[i].name == 'yes') {
+                            var v =
+                                "<svg class=\"bi bi-check\" width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                                "  <path fill-rule=\"evenodd\" d=\"M13.854 3.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3.5-3.5a.5.5 0 11.708-.708L6.5 10.293l6.646-6.647a.5.5 0 01.708 0z\" clip-rule=\"evenodd\"/>\n" +
+                                "</svg>";
+                        } else
+                            var v =
+                                "<svg class=\"bi bi-x\" width=\"1em\" height=\"1em\" viewBox=\"0 0 16 16\" fill=\"currentColor\" xmlns=\"http://www.w3.org/2000/svg\">\n" +
+                                "  <path fill-rule=\"evenodd\" d=\"M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z\" clip-rule=\"evenodd\"/>\n" +
+                                "  <path fill-rule=\"evenodd\" d=\"M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z\" clip-rule=\"evenodd\"/>\n" +
+                                "</svg>";
+                        var text1 = "<td>" + v + "</td>";
+                        $('#' + element.id).append(text1);
+                    }
+
+                });
+            }).catch(function (error) {
+                console.log(error.message);
+            })
+        }
+
+        function etape() {
+            axios.get('/manager/etape/2').then(function (response) {
+
+            }).catch(function (error) {
+                console.log(error.message);
+            })
+        }
+
+
+
+        function validateCheck($rid) {
+
+
+            axios.get('/manager/validate/' + $rid).then(function (response) {
+
+            }).catch(function (error) {
+                console.log(error.message);
+            })
+
+        }
+    </script>
+    {% endblock %}

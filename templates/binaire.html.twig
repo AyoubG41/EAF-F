@@ -1,0 +1,282 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}preferences{% endblock %}
+{% block stylesheets %}
+    <style>
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 10px;
+            height: 10px;
+            -webkit-animation: spin 1s linear infinite; /* Safari */
+            animation: spin 1s linear infinite;
+        }
+
+        /* Safari */
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+{% endblock %}
+{% block body1 %}
+    <select style="float: left !important;margin-left: 21px !important;" onchange="createTable();"
+            id="theselect">
+        {% for evaluations in evaluations %}
+            <option value="{{ evaluations.id }}">{{ evaluations.name }}</option>
+        {% endfor %}
+    </select>
+    <button style="float: right !important;margin-left: 21px !important;" class="btn btn-dark" onclick="sommeVer()">
+        Normalization
+    </button>
+    <br>
+    <br>
+    <table id="firstTable" class="table table-bordered table-dark">
+        <thead id="firstTh">
+        <tr>
+            <!--here goes the rest of the code -->
+        </tr>
+        </thead>
+        <tbody id="tbodyfirst">
+
+        </tbody>
+    </table>
+    <br>
+    <div id="cloneDiv"></div>
+    <button style="float: right !important;margin-left: 21px !important;" class="btn btn-dark" id="theClone">
+        somme
+    </button>
+    <button style="float: left !important;margin-left: 21px !important;" id="eigenvButton" class="btn btn-dark"
+            onclick="eigenVector()">
+        EigenVector
+    </button>
+    <div id="eigenVectorDiv"></div>
+{% endblock %}
+{% block javascripts %}
+
+    <script>
+        createTable();
+
+        //************************************START insertion des preferences*************************************************
+        function insertValue(id1, id2, v1, type) {
+            // console.log(v1.value);
+            //console.log(id1);
+            //console.log(id2);
+            var entr = $('#theselect').val();
+            if (v1.value >= 1 && v1.value <= 9) {
+                $("#p-" + id2 + "-" + id1).replaceWith('<div id="p-' + id2 + '-' + id1 + '" class="loader"></div>');
+                //document.getElementById().HTML = '<div class="loader"></div>';
+                //Axios Function
+                axios.get('/commentsB/' + id1 + '/' + id2 + '/' + v1.value + '/' + type + '/' + entr).then(function (response) {
+                    response.data.forEach(function (element) {
+                        var text = "";
+                        // $('#left').append(text);
+                        if (type == 1) {
+                            $("#p-" + id2 + "-" + id1).replaceWith('<input type="number" value=""  min="1" max="9" name="" id="p-' + id2 + '-' + id1 + '" class="" style="max-width: 50px;"onchange="insertValue( ' + id2 + ',' + id1 + ',this,2)">');
+                        } else
+                            $("#p-" + id2 + "-" + id1).replaceWith('<input type="number" value=""  min="1" max="9" name="" id="p-' + id2 + '-' + id1 + '" class="" style="max-width: 50px;"onchange="insertValue( ' + id2 + ',' + id1 + ',this,1)">');
+                        document.getElementById("p-" + id2 + "-" + id1).value = element.code;
+                    });
+                }).catch(function (error) {
+                    console.log(error.message);
+                })
+            } else
+                alert('The Value Needs To Be Between 1 and 9');
+        }
+
+
+        //************************************END insertion des preferences*************************************************
+        //************************************STQRT SELECT ONCHQNGE*************************************************
+        function createTable() {
+            $('#clonedTabe').remove();
+            $('#firstTh tr ').empty();
+            $('#tbodyfirst').empty();
+            $('#tbodyfirst tr').empty();
+            $('#firstTh tr ').append('<th onclick=""scope="col"></th>');
+            var entr = $('#theselect').val();
+            axios.get('/evaluation/elements/jsongetAllB/' + entr).then(function (response) {
+                var i = 0;
+                response.data.forEach(function (element) {
+                    var text = '<th scope="col">' + element.name + '</th>';
+                    $('#firstTh tr ').append(text);
+                });
+
+
+                response.data.forEach(function (element) {
+                    i++;
+                    var texttwo = "<tr class=\"table-active\">\n" +
+                        "                <th scope=\"row\">" + element.name + "</th>\n";
+                    $('#tbodyfirst').append(texttwo);
+
+                    var j = 1;
+                    response.data.forEach(function (element) {
+                        if (i == j) {
+                            var textthree = "<td style=\"background-color:rgba(179,179,179,0.63) \"> <input type =\"hidden\"value='1'> 1</td>";
+                            $('#tbodyfirst tr').last().append(textthree);
+                        } else if (i > j) {
+                            var textthree = "<td><input type=\"number\" min=\"1\" max=\"9\" name=\"\" id=\"p-" + i + "-" + j + "\" class=\"\"\n" +
+                                "                                       style=\"max-width: 50px;\"\n" +
+                                "                                       onchange=\"insertValue(" + i + "," + j + ",this,1)\"></td>";
+                            $('#tbodyfirst tr').last().append(textthree);
+                            getValues(i, j, 1);
+                        } else if (i < j) {
+                            var textthree = "<td><input type=\"number\" min=\"1\" max=\"9\" name=\"\" id=\"p-" + i + "-" + j + "\" class=\"\"\n" +
+                                "                                       style=\"max-width: 50px;\"\n" +
+                                "                                       onchange=\"insertValue(" + i + "," + j + ",this,2)\"></td>";
+                            $('#tbodyfirst tr').last().append(textthree);
+                            getValues(i, j, 2);
+                        }
+                        j++;
+                    });
+                });
+
+
+            }).catch(function (error) {
+                console.log(error.message);
+            })
+        }
+
+        function getValues(id1, id2, type) {
+            var entr = $('#theselect').val();
+            axios.get('/getValuesB/' + entr + '/' + id1 + '/' + id2 + '/' + type).then(function (response) {
+                response.data.forEach(function (element) {
+                    if (element.code !== null) {
+                        $("#p-" + id1 + "-" + id2).val(element.code);
+                    } else {
+                        $("#p-" + id1 + "-" + id2).val('');
+                    }
+
+                });
+            }).catch(function (error) {
+                console.log(error.message);
+            });
+        }
+
+        function sommeVer() {
+            $('.sommeTr ').remove();
+            $('#tbodyfirst').append('<tr class="sommeTr"></tr>');
+            $('.sommeTr ').append('<th onclick=""scope="col">somme</th>');
+            var result = [];
+            $('#tbodyfirst tr').each(function () {
+                $('td input', this).each(function (index, val) {
+                    if (!result[index]) result[index] = 0;
+                    //console.log(result[index]);
+                    result[index] += parseFloat($(val).val());
+                });
+            });
+
+            $(result).each(function () {
+                //   console.log(this);
+                $('#tbodyfirst tr').last().append('<td>' + this + '</td>')
+            });
+
+        }
+
+        $(document).ready(function () {
+            $("#theClone").click(function () {
+                sommeVer();
+                $("#cloneDiv").empty();
+
+                $("#firstTable").clone().appendTo("#cloneDiv").prop('id', 'clonedTabe');
+                $("#clonedTabe #tbodyfirst").prop('id', 'tbodySecond');
+                $('#clonedTabe .sommeTr').prop('class', 'sommeTrCloned');
+                $('#clonedTabe  tr td input[type=hidden] ').remove();
+                $('#clonedTabe  tr td input[type=number] ').each(function () {
+                    var value = $(this).val();
+                    $(this).replaceWith(value);
+                });
+
+                sommeTotal();
+            });
+        });
+
+        function sommeTotal() {
+            var result = [];
+            $('#clonedTabe tr').each(function () {
+                $('td ', this).each(function (index, val) {
+                    if (!result[index]) result[index] = 0;
+                    var somT = $('.sommeTrCloned td:eq(' + index + ')').text();
+                    var orig = $(val).text();
+                    $(val).text(parseFloat(orig / somT).toFixed(3));
+
+                });
+            });
+
+            $('.sommeTrCloned ').remove();
+        }
+
+        function eigenVector() {
+            $('.tds').remove();
+
+            $('.tdsTh').remove();
+            $('#clonedTabe tr').each(function () {
+                var result = 0;
+
+                $('td ', this).each(function (index, val) {
+
+                    //console.log(result[index]);
+                    result += parseFloat($(val).text());
+
+
+                });
+                var leng = $(this).children('td').length;
+
+                //      console.log(leng);
+                $(this).append("<td class='tds'>  <input class='inpurEig' type =\"hidden\"value='" + parseFloat(result / leng).toFixed(3) + "'>   " + parseFloat(result / leng).toFixed(3) + " (" + (parseFloat(result / leng) * 100).toFixed(2) + "%)</td>")
+            });
+            $('.tds').first().text('Eigenvector ');
+            $('.tds').first().prop('class', 'tdsTh');
+            $('#eigenVectorDiv').after().append(' <button style="float: left !important;margin-left: 21px !important;" id="btnMax" class="btn btn-dark" onclick="maxEigenValue()">\n' +
+                '        Max Eigenvector\n' +
+                '    </button>');
+
+        }
+
+        function maxEigenValue() {
+            $('#resultPara').remove();
+            $('#resultParaCl').remove();
+            $('.sommeTr').each(function () {
+                var result = [];
+                $('td ', this).each(function (index, val) {
+                    //console.log(result[index]);
+                    if (!result[index]) result[index] = 0;
+                    result[index] = parseFloat($(val).text());
+
+                    result[index] *= parseFloat($('.inpurEig:eq(' + index + ')').val());
+                });
+                var lastResult = 0;
+                console.log(result);
+                $(result).each(function () {
+                    //   console.log(this);
+
+                    lastResult += this;
+                });
+
+                $('#btnMax').after("<br><br><p id='resultPara'>Maximum EigenValue (λ<code>Max</code>)=" + lastResult + "</p>");
+                var leng = $('.sommeTr').children('td').length;
+
+                var ci = parseFloat((lastResult - leng) / (leng - 1)).toFixed(4);
+                $('#resultPara').after("<p id='resultParaCl'>Consistency Index CI =" + ci + "</p>");
+                console.log(lastResult);
+                console.log(leng);
+                console.log(ci);
+            });
+
+
+        }
+    </script>
+{% endblock %}

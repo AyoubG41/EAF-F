@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EvaluationElements index{% endblock %}
+
+{% block body %}
+    <h1>EvaluationElements index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Parent</th>
+                <th>Entreprise</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for evaluation_element in evaluation_elements %}
+            <tr>
+                <td>{{ evaluation_element.id }}</td>
+                <td>{{ evaluation_element.name }}</td>
+                <td>{{ evaluation_element.parent }}</td>
+                <td>{{ evaluation_element.entreprise }}</td>
+                <td>
+                    <a href="{{ path('evaluation_elements_show', {'id': evaluation_element.id}) }}">show</a>
+                    <a href="{{ path('evaluation_elements_edit', {'id': evaluation_element.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('evaluation_elements_new') }}">Create new</a>
+{% endblock %}

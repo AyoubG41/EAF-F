@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit EAF{% endblock %}
+
+{% block body %}
+    <h1>Edit EAF</h1>
+
+    {{ include('eaf/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('e_a_f_index') }}">back to list</a>
+
+    {{ include('eaf/_delete_form.html.twig') }}
+{% endblock %}

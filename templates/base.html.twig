@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{ asset('js/kit.js') }}"></script>
+
+    <script src="/js/poper.js"></script>
+    <link rel="stylesheet" href="/css/bt.min.css">
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/axious.js"></script>
+    <!-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>-->
+    {% block stylesheets1 %}
+    {% endblock %}
+    {% block stylesheets %}
+        <style>
+            .tree, .tree ul {
+                margin: 0;
+                padding: 0;
+                list-style: none
+            }
+
+            .tree ul {
+                margin-left: 1em;
+                position: relative
+            }
+
+            .tree ul ul {
+                margin-left: .5em
+            }
+
+            .tree ul:before {
+                content: "";
+                display: block;
+                width: 0;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                border-left: 1px solid
+            }
+
+            .tree li {
+                margin: 0;
+                padding: 0 1em;
+                line-height: 2em;
+                color: #369;
+                font-weight: 700;
+                position: relative
+            }
+
+            .tree ul li:before {
+                content: "";
+                display: block;
+                width: 10px;
+                height: 0;
+                border-top: 1px solid;
+                margin-top: -1px;
+                position: absolute;
+                top: 1em;
+                left: 0
+            }
+
+            .tree ul li:last-child:before {
+                background: #fff;
+                height: auto;
+                top: 1em;
+                bottom: 0
+            }
+
+            .indicator {
+                margin-right: 5px;
+            }
+
+            .tree li a {
+                text-decoration: none;
+                color: #369;
+            }
+
+            .tree li button, .tree li button:active, .tree li button:focus {
+                text-decoration: none;
+                color: #369;
+                border: none;
+                background: transparent;
+                margin: 0px 0px 0px 0px;
+                padding: 0px 0px 0px 0px;
+                outline: 0;
+            }
+
+            HTML CSSResult
+            EDIT ON
+
+            @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900');
+
+
+            .card {
+                width: 10px;
+                clear: both;
+                display: block;
+                padding: 0px 0px;
+                background-color: #009BFF;
+                border-radius: 4px;
+            }
+
+            .card::after {
+                clear: both;
+                display: block;
+                content: "";
+            }
+
+            .card .checkbox-container {
+                float: left;
+                box-sizing: border-box;
+                text-align: center;
+            }
+
+            .card .circular-container {
+                background-color: #343a40;
+            }
+
+            .input-title {
+                clear: both;
+                padding: 22px 0px 0px 0px;
+                font-size: 16px;
+                color: rgba(255, 255, 255, .6);
+                font-weight: 300;
+            }
+
+
+            /* Styling Checkbox Starts */
+            .checkbox-label {
+                display: block;
+                position: relative;
+                margin: auto;
+                cursor: pointer;
+                font-size: 22px;
+                line-height: 24px;
+                height: 24px;
+                width: 24px;
+                clear: both;
+            }
+
+            .checkbox-label input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+            }
+
+            .checkbox-label .checkbox-custom {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                height: 24px;
+                width: 24px;
+                background-color: transparent;
+                border-radius: 5px;
+                transition: all 0.3s ease-out;
+                -webkit-transition: all 0.3s ease-out;
+                -moz-transition: all 0.3s ease-out;
+                -ms-transition: all 0.3s ease-out;
+                -o-transition: all 0.3s ease-out;
+                border: 2px solid #FFFFFF;
+            }
+
+
+            .checkbox-label input:checked ~ .checkbox-custom {
+                background-color: #FFFFFF;
+                border-radius: 5px;
+                -webkit-transform: rotate(0deg) scale(1);
+                -ms-transform: rotate(0deg) scale(1);
+                transform: rotate(0deg) scale(1);
+                opacity: 1;
+                border: 2px solid #FFFFFF;
+            }
+
+
+            .checkbox-label .checkbox-custom::after {
+                position: absolute;
+                content: "";
+                left: 12px;
+                top: 12px;
+                height: 0px;
+                width: 0px;
+                border-radius: 5px;
+                border: solid #009BFF;
+                border-width: 0 3px 3px 0;
+                -webkit-transform: rotate(0deg) scale(0);
+                -ms-transform: rotate(0deg) scale(0);
+                transform: rotate(0deg) scale(0);
+                opacity: 1;
+                transition: all 0.3s ease-out;
+                -webkit-transition: all 0.3s ease-out;
+                -moz-transition: all 0.3s ease-out;
+                -ms-transition: all 0.3s ease-out;
+                -o-transition: all 0.3s ease-out;
+            }
+
+
+            .checkbox-label input:checked ~ .checkbox-custom::after {
+                -webkit-transform: rotate(45deg) scale(1);
+                -ms-transform: rotate(45deg) scale(1);
+                transform: rotate(45deg) scale(1);
+                opacity: 1;
+                left: 8px;
+                top: 3px;
+                width: 6px;
+                height: 12px;
+                border: solid #009BFF;
+                border-width: 0 2px 2px 0;
+                background-color: transparent;
+                border-radius: 0;
+            }
+
+
+            /* For Ripple Effect */
+            .checkbox-label .checkbox-custom::before {
+                position: absolute;
+                content: "";
+                left: 10px;
+                top: 10px;
+                width: 0px;
+                height: 0px;
+                border-radius: 5px;
+                border: 2px solid #FFFFFF;
+                -webkit-transform: scale(0);
+                -ms-transform: scale(0);
+                transform: scale(0);
+            }
+
+            .checkbox-label input:checked ~ .checkbox-custom::before {
+                left: -3px;
+                top: -3px;
+                width: 24px;
+                height: 24px;
+                border-radius: 5px;
+                -webkit-transform: scale(3);
+                -ms-transform: scale(3);
+                transform: scale(3);
+                opacity: 0;
+                z-index: 999;
+                transition: all 0.3s ease-out;
+                -webkit-transition: all 0.3s ease-out;
+                -moz-transition: all 0.3s ease-out;
+                -ms-transition: all 0.3s ease-out;
+                -o-transition: all 0.3s ease-out;
+            }
+
+
+            @import "compass/css3";
+            @import url(https://fonts.googleapis.com/css?family=Pathway+Gothic+One|Open+Sans:400,700);
+            .track-progress {
+                margin: 0;
+                padding: 10px 10px 0 10px;
+                background: white;
+                height: 80px;
+                border-radius: 10px;
+            }
+
+            .track-progress li {
+                list-style-type: none;
+                display: inline-block;
+                position: relative;
+                font: 14px/14px Helvetica, sans-serif;
+                text-transform: uppercase;
+                text-align: center;
+                color: #bbb;
+                border-bottom: 4px #bbb solid;
+                line-height: 3em;
+                width: 11.1%;
+                float: left;
+            }
+
+            .track-progress li:after {
+                content: "\00a0\00a0";
+                /*non-breaking space */
+            }
+
+            .track-progress li:before {
+                position: relative;
+                bottom: -2.5em;
+                float: left;
+                left: 50%;
+                line-height: 1em;
+            }
+
+            @media (max-width: 800px) {
+                .track-progress li {
+                    font-size: 0.7em;
+                }
+            }
+
+            .track-progress li span {
+                padding-left: 0.75em;
+            }
+
+            @media (max-width: 640px) {
+                .track-progress li span {
+                    display: none;
+                }
+            }
+
+            .track-progress li.done {
+                color: #bbb;
+                font-weight: bold;
+                border-bottom: 4px #f69 solid;
+            }
+
+            .track-progress li.done:before {
+                content: "";
+                background: #f69;
+                height: 1.2em;
+                width: 1.2em;
+                line-height: 1.2em;
+                border: none;
+                border-radius: 1.2em;
+            }
+
+            .track-progress li.todo:before {
+                content: "";
+                background: white;
+                border: 0.25em solid #bbb;
+                height: 1em;
+                width: 1em;
+                border-radius: 0.8em;
+            }
+
+            .track-progress em {
+                display: none;
+                font-weight: 700;
+                padding-left: 0.75em;
+            }
+
+            @media (max-width: 640px) {
+                .track-progress em {
+                    display: inline;
+                }
+            }
+
+            p {
+                margin: 0 auto;
+                max-width: 500px;
+                width: 75%;
+                margin-top: 25px;
+                font: 18px/28px 'Open Sans', sans-serif;
+                color: #eee;
+            }
+
+            p em {
+                display: block;
+                font-size: 23px;
+                font-weight: 700;
+                font-style: normal;
+                color: white;
+            }
+
+            /*------------------------------------ Base for label styling */
+
+            [type="checkbox"]:not(:checked) + label,
+            [type="checkbox"]:checked + label {
+                position: relative;
+                padding-left: 1.95em;
+                cursor: pointer;
+            }
+
+            /* checkbox aspect */
+            [type="checkbox"]:not(:checked) + label:before,
+            [type="checkbox"]:checked + label:before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 1.25em;
+                height: 1.25em;
+                border: 2px solid #ccc;
+                background: #fff;
+                border-radius: 4px;
+                box-shadow: inset 0 1px 3px rgba(0, 0, 0, .1);
+            }
+
+            /* checked mark aspect */
+            [type="checkbox"]:not(:checked) + label:after,
+            [type="checkbox"]:checked + label:after {
+                content: '\2713\0020';
+                position: absolute;
+                top: .15em;
+                left: .22em;
+                font-size: 1.3em;
+                line-height: 0.8;
+                color: #09ad7e;
+                transition: all .2s;
+                font-family: 'Lucida Sans Unicode', 'Arial Unicode MS', Arial;
+            }
+
+            /* checked mark aspect changes */
+            [type="checkbox"]:not(:checked) + label:after {
+                opacity: 0;
+                transform: scale(0);
+            }
+
+            [type="checkbox"]:checked + label:after {
+                opacity: 1;
+                transform: scale(1);
+            }
+        </style>
+    {% endblock %}
+</head>
+<body style="background: rgba(186,186,186,0.28)">
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="{{ path('default') }}">AHP-Projects</a>
+
+    <!-- Links -->
+    <ul class="navbar-nav" id="baseUl">
+        {% if is_granted('ROLE_ADMIN') %}
+            {# <li class="nav-item">
+                 <a class="nav-link" href="{{ path('entreprise_index') }}">AHP Projets</a>
+             </li>
+             <li class="nav-item">
+                 <a class="nav-link" href="{{ path('evaluation_elements_index') }}">Critaire</a>
+             </li>
+             <li class="nav-item">
+                 <a class="nav-link" href="{{ path('preferences_index') }}">Preferences ELements</a>
+             </li>
+             <li class="nav-item">
+                 <a class="nav-link" href="{{ path('e_a_f_index') }}">Alternatives</a>
+             </li>
+             <li class="nav-item">
+                 <a class="nav-link" href="/preference">Preferences</a>
+             </li>
+             <li class="nav-item">
+                 <a class="nav-link" href="/eAF/elements/binaryEvaluation">Binaire Evaluation</a>
+             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('user_index') }}">Users</a>
+            </li>
+        {% endif %}
+        {% if is_granted('ROLE_MANAGER') %}
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('entreprise_index') }}">PROJET</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('generate_evaluateures') }}">EVALUATEURES</a>
+            </li>
+            <li class="nav-item" id="expertLi">
+                <a class="nav-link" href="{{ path('generate_experts') }}">EXPERTS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/manager/alternative">Alternatives</a>
+            </li>#}
+         {% endif %}
+                    {% if app.user.evaluateEntreprise.id is defined %}
+                     {% if is_granted('ROLE_EVALUATEUR') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/evaluateur/">PROFILE</a>
+                        </li>
+                       {% if app.user.evaluateEntreprise.etapes[0] == 1  %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/evaluateur/critere">CRITERIA</a>
+                        </li>
+                         {% endif %}
+                         {% if app.user.evaluateEntreprise.etapes[1] == 1  %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/preference">PREFERENCE</a>
+                        </li>
+                         {% endif %}
+                    {% endif %}
+                    {% endif %}
+                    {% if is_granted('ROLE_EXPERT') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/expert/">PROFILE</a>
+                        </li>
+                        <li class="nav-item">
+                         {% if app.user.expertEntreprise.etapes[2] == 1  %}
+                            <a class="nav-link" href="/eAF/elements/binaryEvaluation">Binaire Evaluation</a>
+                        </li>
+                         {% endif %}
+                    {% endif %}
+                    </ul>
+    <ul class="navbar-nav ml-auto">
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <li class="nav-item">
+                <span style="color: white;">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} | </span>
+                <a href="{{ path('fos_user_security_logout') }}">
+                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                </a>
+            </li>
+        {% else %}
+            <li>
+                <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>&nbsp;&nbsp;
+                <a href="/user/new">Register</a>
+            </li>
+
+        {% endif %}
+
+    </ul>
+</nav>
+<br><br>
+<div class="container" style="background: rgba(255,255,255,0.6)">
+    {% block body %}
+
+
+
+    {% endblock %}
+</div>
+<div class="container-fluid">
+    {% block body1 %}
+
+
+
+    {% endblock %}
+</div>
+
+{% block javascripts %}
+
+{% endblock %}
+</body>
+</html>

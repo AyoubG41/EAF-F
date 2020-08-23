@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Preferences{% endblock %}
+
+{% block body %}
+    <h1>Preferences</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ preference.id }}</td>
+            </tr>
+            <tr>
+                <th>FirstValue</th>
+                <td>{{ preference.firstValue }}</td>
+            </tr>
+            <tr>
+                <th>SecondValue</th>
+                <td>{{ preference.secondValue }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('preferences_index') }}">back to list</a>
+
+    <a href="{{ path('preferences_edit', {'id': preference.id}) }}">edit</a>
+
+    {{ include('preferences/_delete_form.html.twig') }}
+{% endblock %}

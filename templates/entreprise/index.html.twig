@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Projet index{% endblock %}
+
+{% block body %}
+
+    <br>
+    <div class="alert alert-success">
+        Please choose or create a project to work on
+    </div>
+    <br>
+
+    <h1>Projet index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Description</th>
+            <th>Actions</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for entreprise in entreprises %}
+            <tr>
+                <td>{{ entreprise.id }}</td>
+                <td>{{ entreprise.name }}</td>
+                <td>{{ entreprise.lieu }}</td>
+                <td>{{ entreprise.description }}</td>
+                <td>
+                    <a class="btn btn-sm " href="{{ path('entreprise_show', {'id': entreprise.id}) }}">Show</a><br><br>
+                    <a class="btn btn-sm" href="{{ path('entreprise_edit', {'id': entreprise.id}) }}">Edit</a>
+                    <form action="{{ path('toNextStep', {'id': 'A'}) }}" method="post">
+                        <br>
+
+                                <select hidden name="project" id="theSelect">
+                                        <option value="{{ entreprise.id }}">{{ entreprise.name }}</option>
+
+                                </select>
+                                <button style="float: right" type="submit" class="btn btn-sm btn-primary">
+                                    <svg class="bi bi-arrow-right-circle" width="1em" height="1em" viewBox="0 0 16 16"
+                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                              d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path fill-rule="evenodd"
+                                              d="M7.646 11.354a.5.5 0 0 1 0-.708L10.293 8 7.646 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0z"/>
+                                        <path fill-rule="evenodd" d="M4.5 8a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z"/>
+                                    </svg>
+                                </button>
+
+
+
+                        <br>
+                    </form>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-sm btn-secondary" href="{{ path('entreprise_new') }}">Create new</a>
+
+    <div class="container">
+
+    </div>
+    <br>
+    <br>
+
+{% endblock %}
+{% block javascripts %}
+    <script>
+        function etape() {
+            axios.get('/manager/etape/').then(function (response) {
+                if (response.data[0].value == false) {
+                    $('#expertLi').remove();
+                } else {
+
+                    $('#baseUl').append("   {% if is_granted('ROLE_MANAGER') %}\n" +
+                        "                    <li class=\"nav-item\" id=\"expertLi\">\n" +
+                        "                        <a class=\"nav-link\" href=\"{{ path('generate_experts') }}\">EXPERTS</a>\n" +
+                        "                    </li>\n" +
+                        "                {% endif %}");
+                }
+            }).catch(function (error) {
+                console.log(error.message);
+            })
+        }
+
+        $('#activated').tooltip('toggle')
+    </script>
+
+{% endblock %}

@@ -1,0 +1,232 @@
+{% extends 'test.html.twig' %}
+
+{% block title %}Evaluateures{% endblock %}
+
+
+{% block body3 %}
+<div class="container">
+
+    {% if is_granted('ROLE_MANAGER') %}
+        <ol class="track-progress">
+
+            {% if app.session.get('project').id is defined %}
+                {% if app.user.evaluateEntreprise.id is defined %}
+                    {% if app.user.evaluateEntreprise.id == app.session.get('project').id %}
+                        <li style="width: 12.5% !important;"class="done">
+                            <em>1</em>
+                            <span data-toggle="tooltip" title="Create Project">1</span>
+                        </li>
+                        <li style="width: 12.5% !important;"class="done">
+                            <em>2</em>
+                            <span data-toggle="tooltip" title="Generate Evaluateures">2</span>
+                        </li>
+                        <li style="width: 12.5% !important;"class="done">
+                            <em>3</em>
+                            <span id="activated"  data-toggle="tooltip" title="Add criteria">3</span>
+                        </li>
+                        <li style="width: 12.5% !important;"class="todo">
+                            <em>4</em>
+                            <span  data-toggle="tooltip" title="Criteria validation">4</span>
+                        </li>
+{#                        <li class="todo">#}
+{#                            <em>5</em>#}
+{#                            <span data-toggle="tooltip" title="Add Preference">5</span>#}
+{#                        </li>#}
+                        <li style="width: 12.5% !important;"class="todo">
+                            <em>5</em>
+                            <span data-toggle="tooltip" title="Add Alternatives">5</span>
+                        </li>
+                        <li style="width: 12.5% !important;"class="todo">
+                            <em>6</em>
+                            <span data-toggle="tooltip" title="Generate Experts">6</span>
+                        </li>
+                        <li style="width: 12.5% !important;"class="todo">
+                            <em>7</em>
+                            <span data-toggle="tooltip" title="Preferences">7</span>
+                        </li>
+                        <li style="width: 12.5% !important;"class="todo">
+                            <em>8</em>
+                            <span data-toggle="tooltip" title="Binary preferences">8</span>
+                        </li>
+                        
+                        
+                    {% else %}
+
+                    {% endif %}
+                {% else %}
+
+                {% endif %}
+
+            {% else %}
+
+            {% endif %}
+
+        </ol>
+
+
+    {% endif %}
+    </div>
+{% endblock %}
+
+
+{% block body1 %}
+
+
+
+    <div class="container">
+
+
+        {#  <form action="/evaluateur/critereCreate" method="post">
+              <div class="form-group">
+                  <label for="exampleInputName"> Name</label>
+                  <input type="text" class="form-control" name="name" id="exampleInputNameame" placeholder="Enter The Name" required>
+              </div>
+              <div class="form-group">
+                  <label for="exampleInputParent">Parent</label>
+                  <select name="parent" id="exampleInputParent">
+                      <option value="">choose</option>
+                      {% for evaluation in evaluations %}
+                      <option value="{{ evaluation.id }}">{{ evaluation.name }}</option>
+                      {% endfor %}
+                  </select>
+              </div>
+              <div class="form-group">
+                  <label for="exampleInputEntreprise">Entreprise</label>
+                  <select name="entreprise" id="exampleInputEntreprise">
+                          <option value="{{ entreprise.id }}">{{ entreprise.name }}</option>
+                  </select>
+              </div>
+              <button type="submit" class="btn btn-primary">Insert</button>
+          </form>#}
+        <div class="span1"></div>
+
+        <div class="span11" style="background-color:#e2e2e2;padding: 20px;border-radius: 10px;">
+            <br>
+            {% for flashMessage in app.session.flashbag.get('addCritere') %}
+                <div class="alert alert-success">
+                    {{ flashMessage }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('addCritereFalse') %}
+                <div class="alert alert-danger">
+                    {{ flashMessage }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+            <div class="alert alert-dark">Criteria Creation
+            </div>
+            <!--creation critere par arbre-->
+
+        <div class="span6">
+            {% if  is_granted('ROLE_EVALUATEUR') or  is_granted('ROLE_MANAGER') %}
+                <a href="#myModal2" role="button" class="btn" data-toggle="modal">New</a>
+                <br>
+                <!-- Modal -->
+                <div id="myModal2" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 id="myModalLabel">Create new criteria</h3>
+                    </div>
+                    <form action='/evaluateur/critereCreate' method='post'>
+                        <div class="modal-body">
+                            <div class='form-group'><label for='evaluation_elements_name' class='required'>Name</label><input type='text' id='evaluation_elements_name' name='name' required='required'maxlength='255' class='input-block-level'></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button  class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+
+
+            {% endif %}
+            <!-- WHERE THE EVALUATIONS ELEMENTS GET-->
+            
+            <div class="span3">
+                <div id="left" class="span3">
+                    <div class="span3">
+                        <div id="left" class="span3 eafs" style="float: left!important">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+            <table class="table table-bordered">
+                <br><br><br>
+                <thead class="">
+                <tr>
+                    <th scope="col">name</th>
+                    <th scope="col">parent</th>
+                    <th scope="col">validee</th>
+                    <th scope="col">Delete</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for myEval in myEvals %}
+                    <tr>
+                        <th>{{ myEval.name }}</th>
+                        {% if  myEval.parent %}
+                            <td>{{ myEval.parent.name }}</td>
+                        {% else %}
+                            <td>null</td>
+                        {% endif %}
+
+                        {% if  myEval.validate == true %}
+                            <td>YES</td>
+                        {% else %}
+                            <td>NO</td>
+                        {% endif %}
+                        <td><a type="button" href="/evaluateur/delete/{{ myEval.id }}" class="btn btn-danger btn-sm">Delete</a></td>
+                    </tr>
+                {% endfor %}
+
+
+                </tbody>
+            </table>
+
+            <div class="span1"></div>
+
+        </div>
+        <!------------------------------------------------------------------------------->
+
+        {% if is_granted('ROLE_MANAGER') %}
+            <div class="container">
+
+                {% if app.user.evaluateEntreprise.id is defined  %}
+                    {% if app.user.evaluateEntreprise.id == app.session.get('project').id  %}
+                        <a href="{{ path('manager') }}" style="padding: 12px !important;float: right; margin-top:10px;font-size: 1rem " type="submit" class="btn btn-primary"><svg class="bi bi-arrow-right-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path fill-rule="evenodd" d="M7.646 11.354a.5.5 0 0 1 0-.708L10.293 8 7.646 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0z"/>
+                                <path fill-rule="evenodd" d="M4.5 8a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z"/>
+                            </svg></a>
+                    {% endif %}
+                {% endif %}
+                <a href="{{ path('generate_evaluateures') }}" style="padding: 12px !important;float: left;margin-top:10px;font-size: 1rem" type="submit" class="btn btn-danger "><svg class="bi bi-arrow-left-circle" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path fill-rule="evenodd" d="M8.354 11.354a.5.5 0 0 0 0-.708L5.707 8l2.647-2.646a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z"/>
+                        <path fill-rule="evenodd" d="M11.5 8a.5.5 0 0 0-.5-.5H6a.5.5 0 0 0 0 1h5a.5.5 0 0 0 .5-.5z"/>
+                    </svg></a>
+
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    <script>
+        $('#activated').tooltip('toggle')
+    </script>
+
+{% endblock %}
+

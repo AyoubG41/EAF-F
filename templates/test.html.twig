@@ -1,0 +1,1252 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link href="/css/combined.css" rel="stylesheet"
+          id="bootstrap-css">
+    <script src="/js/jquery1.js"></script>
+    <script src="/js/bootstrap2.js"></script>
+    <script src="/js/axious.js"></script>
+    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+        {% do render('/login') %}
+    {% endif %}
+
+    <style>
+        /* MENU-LEFT
+        -------------------------- */
+        /* layout */
+        #left ul.nav {
+            margin-bottom: 2px !important;
+            font-size: 12px !important; /* to change font-size, please change instead .lbl */
+        }
+
+        #left ul.nav ul,
+        #left ul.nav ul li {
+            list-style: none !important;
+            list-style-type: none !important;
+            margin-top: 1px !important;
+            margin-bottom: 1px !important;
+        }
+
+        #left ul.nav ul {
+            padding-left: 0 !important;
+            width: auto !important;
+        }
+
+        #left ul.nav ul.children {
+            padding-left: 12px !important;
+            width: auto !important;
+        }
+
+        #left ul.nav ul.children li {
+            margin-left: 0px !important;
+        }
+
+        #left ul.nav li a:hover {
+            text-decoration: none !important;
+        }
+
+        #left ul.nav li a:hover .lbl {
+            color: #999 !important;
+        }
+
+        #left ul.nav li.current > a .lbl {
+            background-color: #999 !important;
+            color: #fff !important;
+        }
+
+        /* parent item */
+        #left ul.nav li.parent a {
+            padding: 0px !important;
+            color: #ccc !important;
+        }
+
+        #left ul.nav > li.parent > a {
+            border: solid 1px #999 !important;
+            text-transform: uppercase !important;
+        }
+
+        #left ul.nav li.parent a:hover {
+            background-color: #fff !important;
+            -webkit-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125) !important;
+            -moz-box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125) !important;
+            box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.125) !important;
+        }
+
+        /* link tag (a)*/
+        #left ul.nav li.parent ul li a {
+            color: #222 !important;
+            border: none !important;
+            display: block !important;
+            padding-left: 5px !important;
+        }
+
+        #left ul.nav li.parent ul li a:hover {
+            background-color: #fff !important;
+            -webkit-box-shadow: none !important;
+            -moz-box-shadow: none !important;
+            box-shadow: none !important;
+        }
+
+        /* sign for parent item */
+        #left ul.nav li .sign {
+            display: inline-block !important;
+            width: 30px !important;
+            padding: 8px 0px 8px 14px !important;
+            background-color: transparent !important;
+            color: #fff !important;
+        }
+
+        #left ul.nav li.parent > a > .sign {
+            margin-left: 0px !important;
+            background-color: #999 !important;
+        }
+
+        /* label */
+        #left ul.nav li .lbl {
+            padding: 5px 14px !important;
+            display: inline-block !important;
+        }
+
+        #left ul.nav li.current > a > .lbl {
+            color: #fff !important;
+        }
+
+        #left ul.nav li a .lbl {
+            font-size: 12px !important;
+        }
+
+        /* THEMATIQUE
+        ------------------------- */
+        /* theme 1 */
+        #left ul.nav > li.item-1.parent > a {
+            border: solid 1px #ff6307 !important;
+        }
+
+        #left ul.nav > li.item-1.parent > a > .sign,
+        #left ul.nav > li.item-1 li.parent > a > .sign {
+            margin-left: 0px !important;
+            background-color: #ff6307 !important;
+        }
+
+        #left ul.nav > li.item-1 .lbl {
+            color: #ff6307 !important;
+        }
+
+        #left ul.nav > li.item-1 li.current > a .lbl {
+            background-color: #ff6307 !important;
+            color: #fff !important;
+        }
+
+        /* theme 2 */
+        #left ul.nav > li.item-8.parent > a {
+            border: solid 1px #51c3eb !important;
+        }
+
+        #left ul.nav > li.item-8.parent > a > .sign,
+        #left ul.nav > li.item-8 li.parent > a > .sign {
+            margin-left: 0px !important;
+            background-color: #51c3eb !important;
+        }
+
+        #left ul.nav > li.item-8 .lbl {
+            color: #51c3eb !important;
+        }
+
+        #left ul.nav > li.item-8 li.current > a .lbl {
+            background-color: #51c3eb !important;
+            color: #fff !important;
+        }
+
+        /* theme 3 */
+        #left ul.nav > li.item-15.parent > a {
+            border: solid 1px #94cf00 !important;
+        }
+
+        #left ul.nav > li.item-15.parent > a > .sign,
+        #left ul.nav > li.item-15 li.parent > a > .sign {
+            margin-left: 0px !important;
+            background-color: #94cf00 !important;
+        }
+
+        #left ul.nav > li.item-15 .lbl {
+            color: #94cf00 !important;
+        }
+
+        #left ul.nav > li.item-15 li.current > a .lbl {
+            background-color: #94cf00 !important;
+            color: #fff !important;
+        }
+
+        /* theme 4 */
+        #left ul.nav > li.item-22.parent > a {
+            border: solid 1px #ef409c !important;
+        }
+
+        #left ul.nav > li.item-22.parent > a > .sign,
+        #left ul.nav > li.item-22 li.parent > a > .sign {
+            margin-left: 0px !important;
+            background-color: #ef409c !important;
+        }
+
+        #left ul.nav > li.item-22 .lbl {
+            color: #ef409c !important;
+        }
+
+        #left ul.nav > li.item-22 li.current > a .lbl {
+            background-color: #ef409c !important;
+            color: #fff !important;
+        }
+
+        .red {
+            background-color: #ff6307 !important;
+        }
+
+        .btn-default1 {
+            font-family: Raleway-SemiBold !important;
+            font-size: 13px !important;
+            color: #51c3eb !important;
+            letter-spacing: 1px !important;
+            line-height: 19px !important;
+            border: 1px solid #51c3eb !important;
+            border-radius: 100px !important;
+            background: transparent !important;
+            transition: all 0.3s ease 0s !important;
+        }
+
+        .btn-default1:hover {
+            color: #FFF !important;
+            background: #51c3eb !important;
+            border: 1px solid #51c3eb !important;
+        }
+
+        .btn-default2 {
+            font-family: Raleway-SemiBold !important;
+            font-size: 13px !important;
+            color: #ff6307 !important;
+            letter-spacing: 1px !important;
+            line-height: 19px !important;
+            border: 1px solid #ff6307 !important;
+            border-radius: 100px !important;
+            background: transparent !important;
+            transition: all 0.3s ease 0s !important;
+        }
+
+        .btn-default2:hover {
+            color: #FFF !important;
+            background: #ff6307 !important;
+            border: 1px solid #ff6307 !important;
+        }
+
+        .formul {
+            display: inline-block !important;
+            margin: 0px 8px 0px 0px !important;
+        }
+
+
+        @import url(https://fonts.googleapis.com/css?family=Pathway+Gothic+One|Open+Sans:400,700);
+        .track-progress {
+            margin: 0;
+            padding: 10px 10px 0 10px;
+            background: white;
+            height: 80px;
+            border-radius: 10px;
+        }
+
+        .track-progress li {
+            list-style-type: none;
+            display: inline-block;
+            position: relative;
+            font: 14px/14px Helvetica, sans-serif;
+            text-transform: uppercase;
+            text-align: center;
+            color: #bbb;
+            border-bottom: 4px #bbb solid;
+            line-height: 3em;
+            width: 25%;
+            float: left;
+        }
+
+        .track-progress li:after {
+            content: "\00a0\00a0";
+            /*non-breaking space */
+        }
+
+        .track-progress li:before {
+            position: relative;
+            bottom: -2.5em;
+            float: left;
+            left: 50%;
+            line-height: 1em;
+        }
+
+        @media (max-width: 800px) {
+            .track-progress li {
+                font-size: 0.7em;
+            }
+        }
+
+        .track-progress li span {
+            padding-left: 0.75em;
+        }
+
+        @media (max-width: 640px) {
+            .track-progress li span {
+                display: none;
+            }
+        }
+
+        .track-progress li.done {
+            color: #bbb;
+            font-weight: bold;
+            border-bottom: 4px #f69 solid;
+        }
+
+        .track-progress li.done:before {
+            content: "";
+            background: #f69;
+            height: 1.2em;
+            width: 1.2em;
+            line-height: 1.2em;
+            border: none;
+            border-radius: 1.2em;
+        }
+
+        .track-progress li.todo:before {
+            content: "";
+            background: white;
+            border: 0.25em solid #bbb;
+            height: 1em;
+            width: 1em;
+            border-radius: 0.8em;
+        }
+
+        .track-progress em {
+            display: none;
+            font-weight: 700;
+            padding-left: 0.75em;
+        }
+
+        @media (max-width: 640px) {
+            .track-progress em {
+                display: inline;
+            }
+        }
+
+        p {
+            margin: 0 auto;
+            max-width: 500px;
+            width: 75%;
+            margin-top: 25px;
+            font: 18px/28px 'Open Sans', sans-serif;
+            color: #eee;
+        }
+
+        p em {
+            display: block;
+            font-size: 23px;
+            font-weight: 700;
+            font-style: normal;
+            color: white;
+        }
+
+        /*--------------------------------------------------- Base for label styling */
+
+        [type="checkbox"]:not(:checked) + label,
+        [type="checkbox"]:checked + label {
+            position: relative;
+            padding-left: 1.95em;
+            cursor: pointer;
+        }
+
+        /* checkbox aspect */
+        [type="checkbox"]:not(:checked) + label:before,
+        [type="checkbox"]:checked + label:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1.25em;
+            height: 1.25em;
+            border: 2px solid #ccc;
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, .1);
+        }
+
+        /* checked mark aspect */
+        [type="checkbox"]:not(:checked) + label:after,
+        [type="checkbox"]:checked + label:after {
+            content: '\2713\0020';
+            position: absolute;
+            top: .15em;
+            left: .22em;
+            font-size: 1.3em;
+            line-height: 0.8;
+            color: #09ad7e;
+            transition: all .2s;
+            font-family: 'Lucida Sans Unicode', 'Arial Unicode MS', Arial;
+        }
+
+        /* checked mark aspect changes */
+        [type="checkbox"]:not(:checked) + label:after {
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        [type="checkbox"]:checked + label:after {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+
+        @import url(https://fonts.googleapis.com/css?family=Pathway+Gothic+One|Open+Sans:400,700);
+        .track-progress {
+            margin: 0;
+            padding: 5px 5px 0 10px;
+            background: white;
+            height: 70px;
+            border-radius: 10px;
+        }
+
+        .track-progress li {
+            list-style-type: none;
+            display: inline-block;
+            position: relative;
+            font: 14px/14px Helvetica, sans-serif;
+            text-transform: uppercase;
+            text-align: center;
+            color: #bbb;
+            border-bottom: 4px #bbb solid;
+            line-height: 3em;
+            width: 14.2%;
+            float: left;
+        }
+
+        .track-progress li:after {
+            content: "\00a0\00a0";
+            /*non-breaking space */
+        }
+
+        .track-progress li:before {
+            position: relative;
+            bottom: -2.5em;
+            float: left;
+            left: 50%;
+            line-height: 1em;
+        }
+
+        @media (max-width: 800px) {
+            .track-progress li {
+                font-size: 0.7em;
+            }
+        }
+
+        .track-progress li span {
+            padding-left: 0.75em;
+        }
+
+        @media (max-width: 640px) {
+            .track-progress li span {
+                display: none;
+            }
+        }
+
+        .track-progress li.done {
+            color: #bbb;
+            font-weight: bold;
+            border-bottom: 4px #f69 solid;
+        }
+
+        .track-progress li.done:before {
+            content: "";
+            background: #f69;
+            height: 1.2em;
+            width: 1.2em;
+            line-height: 1.2em;
+            border: none;
+            border-radius: 1.2em;
+        }
+
+        .track-progress li.todo:before {
+            content: "";
+            background: white;
+            border: 0.25em solid #bbb;
+            height: 0.5em;
+            width: 0.5em;
+            border-radius: 0.8em;
+        }
+
+        .track-progress em {
+            display: none;
+            font-weight: 700;
+            padding-left: 0.75em;
+        }
+
+        @media (max-width: 640px) {
+            .track-progress em {
+                display: inline;
+            }
+        }
+
+        p {
+            margin: 0 auto;
+            max-width: 500px;
+            width: 75%;
+            margin-top: 25px;
+            font: 18px/28px 'Open Sans', sans-serif;
+            color: #eee;
+        }
+
+        p em {
+            display: block;
+            font-size: 23px;
+            font-weight: 700;
+            font-style: normal;
+            color: white;
+        }
+
+        /*------------------------------------ Base for label styling */
+
+        [type="checkbox"]:not(:checked) + label,
+        [type="checkbox"]:checked + label {
+            position: relative;
+            padding-left: 1.95em;
+            cursor: pointer;
+        }
+
+        /* checkbox aspect */
+        [type="checkbox"]:not(:checked) + label:before,
+        [type="checkbox"]:checked + label:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1.25em;
+            height: 1.25em;
+            border: 2px solid #ccc;
+            background: #fff;
+            border-radius: 4px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, .1);
+        }
+
+        /* checked mark aspect */
+        [type="checkbox"]:not(:checked) + label:after,
+        [type="checkbox"]:checked + label:after {
+            content: '\2713\0020';
+            position: absolute;
+            top: .15em;
+            left: .22em;
+            font-size: 1.3em;
+            line-height: 0.8;
+            color: #09ad7e;
+            transition: all .2s;
+            font-family: 'Lucida Sans Unicode', 'Arial Unicode MS', Arial;
+        }
+
+        /* checked mark aspect changes */
+        [type="checkbox"]:not(:checked) + label:after {
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        [type="checkbox"]:checked + label:after {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body style="background: rgba(186,186,186,0.28)">
+
+<!--NAVBAR---->
+<div class="navbar navbar-inverse">
+    <div class="navbar-inner" style="padding: .5rem 1rem;">
+        <div class="container">
+
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar">hada</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+
+            <!-- Be sure to leave the brand out there if you want it shown -->
+            <a class="brand" href="/">AHP-Projects</a>
+
+            <!-- Everything you want hidden at 940px or less, place within here -->
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    {% if is_granted('ROLE_ADMIN') %}
+                        {# <li>
+                             <a style="font-size: 1rem;padding: 4px 6px 10px" class="nav-link"
+                                href="{{ path('entreprise_new') }}">AHP Projets</a>
+                         </li>
+                          <li>
+                             <a style="font-size: 1rem;padding: 4px 6px 10px" class="nav-link"
+                                href="{{ path('evaluation_elements_index') }}">
+                                 Critaire</a>
+                         </li>
+                         <li>
+                             <a style="font-size: 1rem;padding: 4px 6px 10px" class="nav-link"
+                                href="{{ path('preferences_index') }}">Preferences
+                                 ELements</a>
+                         </li>
+                         <li>
+                             <a style="font-size: 1rem;padding: 4px 6px 10px" class="nav-link"
+                                href="{{ path('e_a_f_index') }}">Alternatives</a>
+                         </li>
+                          <li>
+                             <a style="font-size: 1rem;padding: 4px 6px 10px" class="nav-link" href="/preference">Preferences</a>
+                         </li>
+                         <li>
+                             <a style="font-size: 1rem;padding: 4px 6px 10px" class="nav-link" href="/evaluateures">Binaire
+                                 Evaluation</a>
+                         </li>
+                         <li>
+                             <a style="font-size: 1rem;padding: 11px 6px 10px" class="nav-link"
+                                href="{{ path('user_index') }}">Users</a>
+                         </li>
+                     {% endif %}
+                     {% if is_granted('ROLE_MANAGER') %}
+                         <li class="nav-item">
+                             <a class="nav-link" href="{{ path('entreprise_index') }}">PROJET</a>
+                         </li>
+                         <li class="nav-item">
+                             <a class="nav-link" href="manager/generate_evaluateures">EVALUATEURES</a>
+                         </li>
+                         <li class="nav-item">
+                             <a class="nav-link" href="{{ path('generate_experts') }}">EXPERTS</a>
+                         </li>
+                         <li class="nav-item">
+                             <a class="nav-link" href="/manager/alternative">Alternatives</a>
+                         </li>#}
+                    {% endif %}
+                    {% if app.user.evaluateEntreprise.id is defined %}
+                     {% if is_granted('ROLE_EVALUATEUR') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/evaluateur/">PROFILE</a>
+                        </li>
+                       {% if app.user.evaluateEntreprise.etapes[0] == 1  %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/evaluateur/critere">CRITERIA</a>
+                        </li>
+                         {% endif %}
+                         {% if app.user.evaluateEntreprise.etapes[1] == 1  %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/preference">PREFERENCE</a>
+                        </li>
+                         {% endif %}
+                    {% endif %}
+                    {% endif %}
+                    {% if is_granted('ROLE_EXPERT') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/expert/">PROFILE</a>
+                        </li>
+                        <li class="nav-item">
+                         {% if app.user.expertEntreprise.etapes[3] == 1  %}
+                            <a class="nav-link" href="/eAF/elements/binaryEvaluation">Binaire Evaluation</a>
+                        </li>
+                         {% endif %}
+                    {% endif %}
+                </ul>
+                <ul class="nav" style="float: right">
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <li>
+                            <span style="color: white;">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} | </span>
+                            <a style="display: inline-block;font-size: 1rem;"
+                               href="{{ path('fos_user_security_logout') }}">
+                                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                            </a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a style="display: inline-block;font-size: 1rem;"
+                               href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                        </li>
+
+                    {% endif %}
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!------------------------------------------NAVBAR------------------------------------------->
+<br><br><br>
+<div class="container-fluid">
+    {% block body3 %}
+
+
+
+    {% endblock %}
+</div>
+<div class="container">
+    <div class="">
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="alert alert-success">
+                {{ flashMessage }}
+            </div>
+        {% endfor %} {% for flashMessage in app.session.flashbag.get('alert') %}
+            <div class="alert alert-danger">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+        <br>
+        {% if  is_granted('ROLE_EVALUATEUR') or is_granted('ROLE_MANAGER') %}
+            <div class="span1"></div>
+
+            <div class="span11" style="background-color: #cacaca;padding: 20px;border-radius: 10px;">
+
+                <div class="alert alert-info"> Criteria Validation
+                </div>
+                <table class="table table-bordered table-striped">
+
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Parent</th>
+                        <th scope="col">Project</th>
+                        <th scope="col">Validate</th>
+                    </tr>
+
+                    {% for eval in evaluations %}
+                        <tr>
+                        <td>{{ eval.name }}</td>
+
+                        {% if  eval.parent %}
+                            <td>{{ eval.parent.name }}</td>
+                        {% else %}
+                            <td>null</td>
+                        {% endif %}
+
+                        <td>{{ eval.entreprise.name }}</td>
+
+                        {% set continue = null %}
+                        {% if eval.teamValidate %}
+
+                            {% for ev in  eval.teamValidate %}
+
+                                {% if app.user.id == ev %}
+
+                                    {% set continue = 0 %}
+                                {% else %}
+                                    {% set continue = 1 %}
+                                {% endif %}
+                            {% endfor %}
+                            {% if continue == 1 %}
+                                <td>
+                                    <input id="eval{{ eval.id }}" onclick="validateCheck({{ eval.id }})"
+                                           type="checkbox">
+                                </td>
+
+                            {% else %}
+                                <td>
+                                    <input checked id="eval{{ eval.id }}" onclick="validateCheck({{ eval.id }})"
+                                           type="checkbox">
+                                </td>
+
+                            {% endif %}
+                            </tr>
+                        {% else %}
+                            <td>
+                                <input id="eval{{ eval.id }}" onclick="validateCheck({{ eval.id }})"
+                                       type="checkbox">
+                            </td>
+                        {% endif %}
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="span1"></div>
+
+        {% endif %}
+        <!--------------------------------------      this it the create CRITERIA sectiont ------------------------------------------>
+        {#
+                <div class="span6">
+
+                    {% if  is_granted('ROLE_ADMIN')  %}
+                        <div class="span3">
+                            <select style="float: left !important" onchange="hinaoui();" id="theselect">
+                                {% for entreprise in entreprises %}
+                                    <option value="{{ entreprise.id }}">{{ entreprise.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    {% endif %}
+                    {% if  is_granted('ROLE_EVALUATEUR') %}
+                        <div class="span3">
+                            <select style="float: left !important" onchange="hinaoui();" id="theselect">
+
+                                    <option value="{{ evaluateExpert.id }}">{{ evaluateExpert.name }}</option>
+
+                            </select>
+
+
+                        </div>
+                    {% endif %}
+                    <!-- WHERE THE EVALUATIONS ELEMENTS GET-->
+                    <!--------------------------------------------------------------------------------------------------->
+                    <div class="span3">
+                        <div id="left" class="span3">
+
+                        </div>
+                    </div>
+                </div>#}
+
+        {% if is_granted('ROLE_EXPERT') %}
+        <div class="span6">
+            <div class="span3">
+                <label for="theselect1"></label><select style="float: left !important;margin-left: 21px !important;"
+                                                        onchange="hinaoui1();" id="theselect1">
+                    {% for eafs in eafs %}
+                        <option value="{{ eafs.id }}">{{ eafs.name }}</option>
+                    {% endfor %}
+                </select></div>
+            {% endif %}
+            <!--------------------------------------where CRITERIA go----MODALS--------------------------------------------------------->
+            {#            <div class="span3">#}
+            {#                <div id="left" class="span3 eafs" style="float: left!important">#}
+
+            {#                </div>#}
+            {#            </div>#}
+        </div>
+
+    </div>
+    <div id="myModal" class="modal hide fade " tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+
+            <h3 id="myModalLabel">MAPPING</h3>
+        </div>
+        <div class="modal-body">
+
+            <form action="/eAF/elements/addnewmap" method="post">
+                <div id="hahya">
+                    <div id="alert1" class='alert alert-danger' role='alert'></div>
+                    <div id="alert2" class='alert alert-primary' role='alert'></div>
+                    <input class="input-block-level" required name="value" type="text"><br>
+                    <button class="btn btn-danger" type="submit">Enter</button>
+
+                </div>
+            </form>
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-succes" data-dismiss="modal" aria-hidden="true">Close</button>
+        </div>
+    </div>
+
+    <label id="testing"></label>
+</div>
+
+
+<!--------------------------------- the add a new child model--------------------------------------->
+
+
+<div id='whereModel'>
+</div>
+
+<br>
+<br>
+<!--------------------------------- the add a new child model--------------------------------------->
+
+{#  if is_granted('ROLE_EXPERT') %}
+    <div class="container" align="center" style="width: 50%;">
+
+        <table class="table table-hover table-striped">
+            <tr class="success">
+                <th>Eaf Elements</th>
+                <th>Evaluation Elements</th>
+                <th>Value</th>
+                <th>Delete</th>
+            </tr>
+          { {% for mapping in mapping %}
+                <tr>
+                    <td>{{ mapping.EAFElement.getName() }}</td>
+                    <td>{{ mapping.EvaluationElement.getName() }}</td>
+                    <td>{{ mapping.value }}</td>
+                    <td>
+                        <a href="/deleteMapping/{{ mapping.id }}" class="btn btn-mini btn-danger">Delete</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endif %}#}
+<div class="container-fluid">
+    {% block body1 %}
+
+
+
+    {% endblock %}
+</div>
+
+</body>
+
+<script>
+
+    !function ($) {
+
+        // Le left-menu sign
+        /* for older jquery version
+        $('#left ul.nav li.parent > a > span.sign').click(function () {
+            $(this).find('i:first').toggleClass("icon-minus");
+        }); */
+
+        $(document).on("toggle", "#left ul.nav li.parent > a > span.sign", function () {
+            $(this).find('.bi-alarm').replaceWith("<svg class='bi bi-arrow-down-left-circle-fill' width='1em' height='1em' viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>\n" +
+                "    <path fill-rule='evenodd' d='M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-6.5 3h-4a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 1 0v2.793l4.146-4.147a.5.5 0 0 1 .708.708L6.707 10H9.5a.5.5 0 0 1 0 1z'/>\n" +
+                "</svg>");
+        });
+
+//-------------------------------
+
+// popovers initialization - on hover
+
+        // Open Le current menu
+        $("#left ul.nav li.parent.active > a > span.sign").find('i:first').addClass("icon-minus");
+        $("#left ul.nav li.current").parents('ul.children').addClass("in");
+
+    }(window.jQuery);
+
+    valueAdd();
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    //-------------------------------------------------------------------Mapping Insert----------------------------------------------------------------------------------------------------
+
+    function valueAdd() {
+
+        $(document).on("click", "[about='a']", function () {
+            $(this).css("cssText", "color:red !important");
+            var evalId = $(this).attr('id'); // or var clickedBtnID = this.id
+            var evalId1 = $(this).attr('content'); // or var clickedBtnID = this.id
+            if ($("[name='evalId']").length || $("[content='evalId]").length) {
+                $("[name='evalId']").remove();
+                $("[content='evalId']").remove();
+            }
+
+            var txt1 = "<input name='evalId' value='" + evalId + "' type='hidden'>";
+            var txt2 = "<label style='font-family: sans-serif' content='evalId'>  <strong>Tu as choisi " + evalId1 + " </strong></label>";
+            $("#alert1").prepend(txt2);// or var clickedBtnID = this.id
+            $("#hahya").prepend(txt1);// or var clickedBtnID = this.id
+            if ($("[name='eafId']").length) {
+                $('#myModal').modal('show');
+
+            }
+        });
+        $(document).on("click", "[about='b']", function () {
+            $(this).css("cssText", "color:blue !important");
+            var eafId = $(this).attr('id'); // or var clickedBtnID = this.id
+            var evalId1 = $(this).attr('content'); // or var clickedBtnID = this.id
+
+            if ($("[name='eafId']").length || $("[content='eafId']").length) {
+                $("[name='eafId']").remove();
+                $("[content='eafId']").remove();
+            }
+            var txt1 = "<input name='eafId' value='" + eafId + "' type='hidden'>";
+
+            var txt2 = "<label content='eafId'> <strong> Tu as choisi " + evalId1 + "<strong> </label>";
+            $("#alert2").prepend(txt2);// or var clickedBtnID = this.id
+            $("#hahya").prepend(txt1);// or var clickedBtnID = this.id
+
+
+            if ($("[name='evalId']").length) {
+                $('#myModal').modal('show');
+
+            }
+
+        });
+
+    }
+
+    //-------------------------------------------------------------------Entreprise Get Elements----------------------------------------------------------------------------------------------------
+
+    hinaoui();
+
+    function hinaoui() {
+        $('#left').empty();
+        var entr = $('#theselect').val();
+        axios.get('/evaluation/elements/jsonget/' + entr).then(function (response) {
+
+            response.data.forEach(function (element) {
+                var text = "{% if is_granted('ROLE_EVALUATEUR') or is_granted('ROLE_MANAGER') %} <ul id='menu-group-1' class='nav menu'>\n" +
+                    "                    <li class='item-8 deeper parent'>\n" +
+                    "\n" +
+                    "                        <a id=a" + element.id + " class='' href='#'>\n" +
+                    "                            <span  data-toggle='collapse' data-parent='#menu-group-1'\n" +
+                    "                                  href='#sub-item-" + element.id + "' class='sign'><i\n" +
+                    "                                        class='icon-plus icon-white'></i></span>\n" +
+                    "                            <span  class='lbl' content=" + element.name + " id='parent'>" + element.name + "</span>\n" +
+                    "    <button  onclick='createChildEnt(" + element.id + ",\"" + element.name + "\"," + element.parent + ",\"" + element.parentName + "\",\"" + element.entreprise + "\")' type='submit' class='btn-default1' data-container='body'\n" +
+                    "            data-toggle='popover-hover' data-placement='right'>+\n" +
+                    "    </button></a>" +
+                    "  <ul class='children nav-child unstyled small collapse'id='sub-item-" + element.id + "'></ul>    {% endif %}";
+                $('#left').append(text);
+
+                getEval(element.id);
+            });
+
+
+        }).catch(function (error) {
+            console.log(error.message);
+        })
+    }
+
+    //-------------------------------------------------------------------Entreprise Get Elements----------------------------------------------------------------------------------------------------
+    function getEval($id) {
+        axios.get('/evaluation/elements/evalget/' + $id).then(function (response) {
+
+            response.data.forEach(function (element) {
+                console.log(element);
+                var text = "{% if is_granted('ROLE_EVALUATEUR')or is_granted('ROLE_MANAGER') %} <li class='item-9 deeper parent'>\n" +
+                    "\n" +
+                    "                                    \n" +
+                    "                                        <a class='' href='#'>\n" +
+                    "                                            <span data-toggle='collapse' data-parent='#menu-group-1'\n" +
+                    "                                                  href='#sub-item-" + element.id + "' class='sign'>" +
+                    "<i\n" +
+                    "                                                      class='icon-plus icon-white'></i></span>\n" +
+                    "                                            <span id='" + element.id + "' content='" + element.name + "'\n" +
+                    "                                                  class='lbl'>" + element.name + "</span>\n" +
+                    "    <button type='submit' onclick='createChildEnt(" + element.id + ",\"" + element.name + "\"," + element.parent + ",\"" + element.parentName + "\",\"" + element.entreprise + "\")' class='btn-default1' data-container='body'\n" +
+                    "            data-toggle='popover-hover' data-placement='right'>+\n" +
+                    "    </button>\n" +
+                    "    </a>\n" +
+                    "                                   <ul class='children nav-child unstyled small collapse'id='sub-item-" + element.id + "'></ul>  </li>   {% endif %}";
+                $('#sub-item-' + element.parent).append(text);
+                getEval(element.id);
+
+            });
+
+
+        }).catch(function (error) {
+            console.log(error.message);
+        })
+    }
+
+    //-------------------------------------------------------------------EAFS----------------------------------------------------------------------------------------------------
+    hinaoui1();
+
+    function hinaoui1() {
+        $('.eafs').empty();
+        var entr = $('#theselect1').val();
+        axios.get('/eAF/elements/jsonget1/' + entr).then(function (response) {
+
+            response.data.forEach(function (element) {
+                var text = "{% if is_granted('ROLE_EXPERT') %}<ul id='menu-group-2' class='nav menu'>\n" +
+                    "                    <li class='item-8 deeper parent'>\n" +
+                    "\n" +
+                    "                        <a style=\"border: solid 1px #ff6307!important;\" id=a" + element.id + " class='' href='#'>\n" +
+                    "                            <span style=\"background-color: #ff6307!important\"  data-toggle='collapse' data-parent='#menu-group-2'\n" +
+                    "                                  href='#sub-itemb-" + element.id + "' class='sign'><i\n" +
+                    "                                        class='icon-plus icon-white'></i></span>\n" +
+                    "                            <span about=\"b\"  style=\"color: #ff6307!important\" class='lbl' content='" + element.name + "' id='" + element.id + "'>" + element.name + "</span>\n" +
+                    "    <button  onclick='createChild(" + element.id + ",\"" + element.name + "\"," + element.parent + ",\"" + element.parentName + "\",\"" + element.eaf + "\")' type='submit' class='btn-default2' data-container='body'\n" +
+                    "            data-toggle='popover-hover' data-placement='right'>+\n" +
+                    "    </button>\n" +
+                    "                        </a>" +
+                    "  <ul class='children nav-child unstyled small collapse'id='sub-itemb-" + element.id + "'></ul>{% endif %}";
+                $('.eafs').append(text);
+
+                getEval1(element.id);
+            });
+
+
+        }).catch(function (error) {
+            console.log(error.message);
+        })
+    }
+
+    //------------------------------------------------------------------**********************************------------------------------------------------------------------
+    function getEval1($id) {
+        axios.get('/eAF/elements/evalget1/' + $id).then(function (response) {
+
+            response.data.forEach(function (element) {
+                console.log(element);
+                var text = "{% if is_granted('ROLE_EXPERT') %} <li class='item-9 deeper parent'>\n" +
+                    "\n" +
+                    "                                    \n" +
+                    "                                        <a   class='' href='#'>\n" +
+                    "                                            <span style=\"background-color: #ff6307!important\" data-toggle='collapse' data-parent='#menu-group-2'\n" +
+                    "                                                  href='#sub-itemb-" + element.id + "' class='sign'>" +
+                    "<i\n" +
+                    "                                                      class='icon-plus icon-white'></i></span>\n" +
+                    "                                            <span style=\"color: #ff6307!important\"  id='" + element.id + "' content='" + element.name + "'\n" +
+                    "                                                  about='b'\n" +
+                    "                                                  class='lbl'>" + element.name + "</span> " +
+                    "<button  onclick='createChild(" + element.id + ",\"" + element.name + "\"," + element.parent + ",\"" + element.parentName + "\",\"" + element.eaf + "\")' type='submit' class='btn-default2' data-container='body'\n data-toggle='popover-hover' data-placement='right'>+\n" +
+                    "    </button>\n" +
+                    "  </a>\n" +
+                    "                                   <ul class='children nav-child unstyled small collapse'id='sub-itemb-" + element.id + "'></ul>  </li>{% endif %} ";
+                $('#sub-itemb-' + element.parent).append(text);
+
+                getEval1(element.id);
+            });
+
+
+        }).catch(function (error) {
+            console.log(error.message);
+        })
+    }
+
+    //-------------------------------------------------------------------TOOLTIPS---------------------------------------------------------------------------------------------------
+
+    /* $('[data-toggle="popover-hover"]').popover({
+       html: true,
+       trigger: 'hover',
+       placement: 'bottom',
+       content: function () {
+           return 'Ajouter Un Nouveau Element';
+       }
+   });*/
+
+    //****************************************Create a child of an element EAF******************************************************************************************************
+    function createChild($id, $name, $parent, $parentName, $eaf) {
+        if (!$parent) {
+            var para = null;
+            var paraname = null;
+        } else {
+            para = $parent;
+            paraname = $parentName;
+        }
+
+        var model = "\n" +
+            "<div class='modal hide fade' id='myModalv1' tabindex='-1' role='dialog'>\n" +
+            "    <div class='modal-dialog' role='document'>\n" +
+            "        <div class='modal-content'>\n" +
+            "            <div class='modal-header'>\n" +
+            "                <h5 class='modal-title'>Create new EvaluationElements</h5>\n" +
+            "                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>\n" +
+            "\n" +
+            "                </button>\n" +
+            "            </div>\n" +
+            "            <div class='modal-body'>\n" +
+            "\n" +
+            "\n" +
+            "                <div class='' style='background: rgba(255,255,255,0.6)'>\n" +
+            "\n" +
+            "\n" +
+            "\n" +
+            "                    <form action='/eAF/elements/addnewb' method='post'>\n" +
+            "                        <div id='evaluation_elements'>\n" +
+            "                            <div class='form-group'><label for='evaluation_elements_name' class='required'>Name</label><input\n" +
+            "                                    type='text' class='input-block-level' id='evaluation_elements_name' name='name' required='required'\n" +
+            "                                    maxlength='255' class='input-block-level'></div>\n" +
+            "                            <div class='form-group'><label class='' for='evaluation_elements_parent'>Parent</label><select\n" +
+            "                                    id='evaluation_elements_parent' name='id_eafel' class='input-block-level'>\n" +
+            "                                <option class='input-block-level' value='" + $id + "'>" + $name + "</option>\n" +
+            "                            </select></div>\n" +
+            "                            <div class='form-group'><label class='' for='evaluation_elements_entreprise'>Entreprise</label><select\n" +
+            "                                    id='evaluation_elements_entreprise' name='id_eaf' class='input-block-level'>\n" +
+            "                                <option value='" + $eaf + "'>" + $eaf + "</option>\n" +
+            "                            </select></div>\n" +
+            "                        </div>\n" +
+            "                        <button type='submit' class='btn btn-success'>Save</button>\n" +
+            "                         <button type=\"button\" aria-hidden=\"true\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n" +
+            "                    </form>\n" +
+            "\n" +
+            "                </div>\n" +
+            "\n" +
+            "\n" +
+            "            </div>\n" +
+            "        </div>\n" +
+            "    </div>\n" +
+            "</div>";
+
+        $('#whereModel').append(model);
+        $(document).ready(function () {
+            $('#myModalv1').modal({
+                show: true,
+            });
+
+        });
+
+    }
+
+    //****************************************Create a child of an element ENTREPRISE******************************************************************************************************
+
+    function createChildEnt($id, $name, $parent, $parentName, $ent) {
+        $('#whereModel').empty();
+        if (!$parent) {
+            var para = null;
+            var paraname = null;
+        } else {
+            para = $parent;
+            paraname = $parentName;
+        }
+
+        var model = "\n" +
+            "\n" +
+            "<div class='modal hide fade' id='myModalv2' tabindex='-1' role='dialog'>\n" +
+            "    <div class='modal-dialog' role='document'>\n" +
+            "        <div class='modal-content'>\n" +
+            "            <div class='modal-header'>\n" +
+            "                <h5 class='modal-title'>Create new criteria</h5>\n" +
+            "                <button type='button' class='close' data-dismiss='modal' aria-label='Close'>\n" +
+            "\n" +
+            "                </button>\n" +
+            "            </div>\n" +
+            "            <div class='modal-body'>\n" +
+            "\n" +
+            "\n" +
+            "                <div class='' style='background: rgba(255,255,255,0.6)'>\n" +
+            "\n" +
+            "\n" +
+            "\n" +
+            "                    <form action='/evaluateur/critereCreate' method='post'>\n" +
+            "                        <div id='evaluation_elements'>\n" +
+            "                            <div class='form-group'><label for='evaluation_elements_name' class='required'>Name</label><input\n" +
+            "                                    type='text' id='evaluation_elements_name' name='name' required='required'\n" +
+            "                                    maxlength='255' class='input-block-level'></div>\n" +
+            "                            <div class='form-group'><label class='' for='evaluation_elements_parent'>Parent</label><select\n" +
+            "                                    id='evaluation_elements_parent' name='parent' class='input-block-level'>\n" +
+            "                                <option value='" + $id + "'>" + $name + "</option>\n" +
+            "                            </select></div>\n" +
+            "                            <div class='form-group'><label class='' for='evaluation_elements_entreprise'>Entreprise</label><select\n" +
+            "                                    id='evaluation_elements_entreprise' name='entreprise' class='input-block-level'>\n" +
+            "                                <option value='" + $ent + "'>" + $ent + "</option>\n" +
+            "                            </select></div>\n" +
+            "                        </div>\n" +
+            "                        <button type='submit' class='btn btn-success'>Save</button>\n" +
+            "                        <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\n" +
+            "                    </form>\n" +
+            "\n" +
+            "                </div>\n" +
+            "\n" +
+            "\n" +
+            "            </div>\n" +
+            "        </div>\n" +
+            "    </div>\n" +
+            "</div>";
+
+
+        $('#whereModel').append(model);
+        $(document).ready(function () {
+            $('#myModalv2').modal({
+                show: true,
+                backdrop: 'static',
+                keyboard: false
+            });
+
+        });
+
+        //********************************************************************Validate Check*********************************************************************************//
+
+    }
+
+    function validateCheck($rid) {
+
+
+        axios.get('/evaluateur/validation/' + $rid).then(function (response) {
+
+        }).catch(function (error) {
+            console.log(error.message);
+        })
+
+    }
+</script>
+
+{% block javascripts %}
+
+{% endblock %}
+
+
